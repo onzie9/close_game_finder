@@ -35,7 +35,10 @@ for tp in top_players:
     for game in range(1,num_games):
         game_url = soup.find("tr", id="row" + str(game))
         game_url = str(game_url)
-        game_url = game_url.split('href="')[1].split('">View')[0]
+        try:
+            game_url = game_url.split('href="')[1].split('">View')[0]
+        except IndexError:
+            continue
         annotated_game = requests.get("https://www.cross-tables.com/" + game_url, headers=headers)
         annotated_soup = BeautifulSoup(annotated_game.text, "html.parser")
 
