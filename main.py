@@ -25,7 +25,7 @@ for row in range(1, 21):
     annotated_games = url['href'].replace("results", "anno")
     top_players.append([name, url['href'], annotated_games])
 
-for tp in top_players:
+for tp in top_players[4:]:
 
     r = requests.get("https://www.cross-tables.com/" + tp[2], headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
@@ -64,6 +64,6 @@ for tp in top_players:
             if len(data) > 10:
                 print(len(data))
                 df = pd.DataFrame(columns=columns, data=data)
-                df.to_csv('close_games.csv', index=False)
+                df.to_csv('close_games_second_batch.csv', index=False)
         except ValueError:
             continue
